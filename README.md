@@ -24,9 +24,9 @@ $ bundle exec rake db:create
 $ bundle exec rake db:migrate
 $ bundle exec rails server
 
-================================
+============================================
 Devise Setup
-================================
+============================================
 Gemfile -> gem 'devise', '3.5.6'
 $ bundle install
 $ bundle exec rails generate devise:install
@@ -41,3 +41,12 @@ $ bundle exec rails server -> Sign In / Log In
 $ bundle exec rails dbconsole
 postgres> \x on
 postgres> select * from users;
+postgres> \q
+
+================================
+Bower Setup
+================================
+$ npm install -g bower
+Gemfile -> gem 'bower-rails'
+$ bundle install
+$ bundle exec rake -T bower
