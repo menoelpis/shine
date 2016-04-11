@@ -27,12 +27,13 @@ $ bundle exec rails server
 ============================================
 Devise Setup
 ============================================
-Gemfile -> gem 'devise', '3.5.6'
+[Gemfile] + gem 'devise', '3.5.6'
 $ bundle install
 $ bundle exec rails generate devise:install
 $ bundle exec rails generate devise user
 
-Restriction on all pages(app/controllers/application_controller.rb)
+<note>Restriction on all pages
+[app/controllers/application_controller.rb]
 + before_action :authenticate_user!
 
 $ bundle exec rake db:migrate
@@ -47,6 +48,20 @@ postgres> \q
 Bower Setup
 ================================
 $ npm install -g bower
-Gemfile -> gem 'bower-rails'
+[Gemfile] + gem 'bower-rails'
 $ bundle install
 $ bundle exec rake -T bower
+
+Create "Bowerfile" in root
++ asset 'bootstrap-sass-official' 
+
+<note> http://bower.is/search
+
+$ bower search bootstrap | head
+$ bundle exec rake bower:install
+
+[app/assets/stylesheets/application.css]
++ *= require 'bootstrap-sass-official'
+
+
+
