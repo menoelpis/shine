@@ -102,7 +102,31 @@ $ bundle exec rake db:migrate
 
 <note> UPDATE users SET email = 'user2@example.com' WHERE id = 1;
 
+$ bundle exec rails dbconsole
 
+shine_development> INSERT INTO
+				   	users (
+				   		email,
+				   		encrypted_password,
+				   		created_at,
+				   		updated_at
+				   	)
+				   VALUES (
+				   	'foo@example.com',
+				   	'$abcd',
+				   	now(),
+				   	now()
+				   );
 
+=========================================
+PostgreSQL Schema Change
+=========================================
 
+[/config/application.rb]
++ config.active_record.schema_format = :sql
+
+$ rm db/schema.rb
+$ bundle exec rake db:migrate
+$ RAILS_ENV=test bundle exec rake db:drop
+$ RAILS_ENV=test bundle exec rake db:create
 
