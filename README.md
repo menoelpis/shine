@@ -48,9 +48,9 @@ postgres> \x on
 postgres> select * from users;
 postgres> \q
 
-================================
+========================================
 Bower Setup
-================================
+========================================
 $ npm install -g bower
 [Gemfile] + gem 'bower-rails'
 $ bundle install
@@ -67,11 +67,41 @@ $ bundle exec rake bower:install
 [app/assets/stylesheets/application.css]
 + *= require 'bootstrap-sass-official'
 
-================================
+=========================================
 Devise View
-================================
+=========================================
 
 $ bundle exec rails generate devise:views
+
+=========================================
+PostgreSQL Email Constraint
+=========================================
+
+$ bundle exec rails g migration add-email-constraint-to-users
++
+def up
+	execute %{
+		ALTER TABLE
+			users 
+		ADD CONSTRAINT 
+			email_must_be_company_email
+		CHECK ( email ~* '^[^@]+@example\\.com' )
+	}  
+  end
+
+def down
+	execute %{
+		ALTER TABLE
+			users 
+		DROP CONSTRAINT
+			email_must_be_company_email
+	}
+end
+
+$ bundle exec rake db:migrate
+
+<note> UPDATE users SET email = 'user2@example.com' WHERE id = 1;
+
 
 
 
