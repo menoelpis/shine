@@ -8,6 +8,10 @@ $ rails new --skip-turbolinks \
             -d postgresql     \
             shine
 
+<note> github-setup
+$ git remote show origin
+$ git remote set-url origin git+ssh://git@github.com/username/reponame.git
+
 ============================================
 PostgreSQL Setup
 ============================================
