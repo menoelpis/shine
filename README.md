@@ -63,5 +63,12 @@ $ bundle exec rake bower:install
 [app/assets/stylesheets/application.css]
 + *= require 'bootstrap-sass-official'
 
+================================
+Devise View
+================================
+
+$ bundle exec rails generate devise:views
+
+
 
 
