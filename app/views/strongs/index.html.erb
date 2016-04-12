@@ -1,0 +1,44 @@
+<header>
+	<h1 class="h2">Strong Search</h1>
+</header>
+<section class="search-form">
+	<%= form_for :strongs, method: :get do |f| %>
+		<div class="input-group input-group-lg">
+			<%= label_tag :keywords, nil, class: "sr-only" %>
+			<%= text_field_tag :keywords, nil,
+					placeholder: "Strong Number or Description",
+					class: "form-control input-lg" %>
+			<span class="input-group-btn">
+				<%= submit_tag "Find Strongs",
+					class: "btn btn-primary btn-lg" %>
+			</span>
+		</div>
+	<% end %>
+</section>
+<section class="searh-results">
+	<header>
+		<h1 class="h3">
+			Results
+		</h1>
+	</header>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Strong Number</th>
+				<th>Morphology</th>
+				<th>Description</th>
+				<th>Part Of Speech</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @strongs.each do |strong| %>
+				<tr>
+					<td><%= strong.strongsid %></td>
+					<td><%= strong.lemma %></td>
+					<td><%= strong.description %></td>
+					<td><%= strong.partofspeech %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</section>
