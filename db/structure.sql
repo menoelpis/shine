@@ -43,6 +43,41 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: strongs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE strongs (
+    id integer NOT NULL,
+    strongsid character varying NOT NULL,
+    lemma character varying,
+    xlit character varying,
+    pronounce character varying,
+    description text,
+    partofspeech character varying,
+    language character varying
+);
+
+
+--
+-- Name: strongs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE strongs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: strongs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE strongs_id_seq OWNED BY strongs.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -87,7 +122,22 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY strongs ALTER COLUMN id SET DEFAULT nextval('strongs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: strongs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY strongs
+    ADD CONSTRAINT strongs_pkey PRIMARY KEY (id);
 
 
 --
@@ -96,6 +146,13 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_strongs_on_strongsid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_strongs_on_strongsid ON strongs USING btree (strongsid);
 
 
 --
@@ -128,4 +185,6 @@ SET search_path TO "$user", public;
 INSERT INTO schema_migrations (version) VALUES ('20160410223542');
 
 INSERT INTO schema_migrations (version) VALUES ('20160411115205');
+
+INSERT INTO schema_migrations (version) VALUES ('20160411213023');
 
